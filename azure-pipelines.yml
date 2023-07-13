@@ -21,15 +21,15 @@ jobs:
     displayName: 'pytest'
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: '$(Build.SourcesDirectory)'
-      includeRootFolder: false
+      rootFolderOrFile: '$(Build.SourcesDirectory)/*'
+      includeRootFolder: true
       archiveType: 'zip'
-      archiveFile: 
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       replaceExistingArchive: true
 
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: '$(Pipeline.Workspace)'
+      targetPath: '$(Build.ArtifactStagingDirectory)/'
       artifact: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       publishLocation: 'pipeline'
 
