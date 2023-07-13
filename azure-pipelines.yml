@@ -7,8 +7,8 @@ trigger:
 - main
 
 pool:
-  vmImage: 
-    name: 'Runner-01'
+  name: 'Runner-01'
+  demands: ubuntuserver2204
 strategy:
   matrix:
     Python27:
