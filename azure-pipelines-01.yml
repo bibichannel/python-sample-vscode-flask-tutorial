@@ -17,20 +17,22 @@ jobs:
       python3 -m pip install --upgrade pip
       pip3 install -r requirements.txt
       ls -la
+      pwd
+      cat Dockerfile
       cat entrypoint.sh
     displayName: 'Install dependencies'
 
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: '$(Build.BinariesDirectory)'
+      rootFolderOrFile: '$(Build.BinariesDirectory)/'
       includeRootFolder: true
       archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/backend-dev.zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: 'backend-dev.zip'
+      ArtifactName: '$(Build.BuildId).zip'
       publishLocation: 'Container'
 
     
